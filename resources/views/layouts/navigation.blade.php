@@ -13,8 +13,36 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Inicio') }}
                     </x-nav-link>
+
+                    <!--SOLO SI ES ADMIN-->
+
+                    <!--Usuarios-->
+                    <x-nav-link class="font-bold">
+                        {{ __('Usuarios') }}
+                    </x-nav-link>
+                    <!--:href="route('users')" :active="request()->routeIs('users')"-->
+
+                    <!--Materiales-->
+                    <x-nav-link class="font-bold">
+                        {{ __('Peliculas') }}
+                    </x-nav-link>
+
+                    <!--Piezas-->
+                    <x-nav-link class="font-bold">
+                        {{ __('Reseñas') }}
+                    </x-nav-link>
+
+                    <!--Ventas-->
+                    <x-nav-link class="font-bold">
+                        {{ __('Likes') }}
+                    </x-nav-link>
+
+
+
+
+
                 </div>
             </div>
 
@@ -35,15 +63,26 @@
 
                     <x-slot name="content">
                         <!-- Authentication -->
+                        <x-dropdown-link href="">
+                            {{'Mi perfil'}}
+                        </x-dropdown-link>
+
+                        <x-dropdown-link href="">
+                            {{'Configuración'}}
+                        </x-dropdown-link>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
+                            <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log out') }}
-                            </x-dropdown-link>
+                            </x-dropdown-link>                            
+
                         </form>
+
+               
+
+
                     </x-slot>
                 </x-dropdown>
             </div>
@@ -88,8 +127,7 @@
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
+                    <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log out') }}
                     </x-responsive-nav-link>
