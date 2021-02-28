@@ -67,7 +67,7 @@
                             {{'Mi perfil'}}
                         </x-dropdown-link>
 
-                        <x-dropdown-link href="">
+                        <x-dropdown-link href="{{ Route('config') }}">
                             {{'Configuración'}}
                         </x-dropdown-link>
                         <form method="POST" action="{{ route('logout') }}">

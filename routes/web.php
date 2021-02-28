@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +22,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::get('/configuracion',[UserController::class, 'config'])->name('config');
+Route::post('/user/update',[UserController::class, 'update'])->name('user.update');
 require __DIR__.'/auth.php';
