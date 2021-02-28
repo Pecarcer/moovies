@@ -28,7 +28,7 @@ class UserController extends Controller
         
         $nick =  $request->input('nick');
         $email =  $request->input('email');
-        //$password = $request->input('password');    
+        //$password = Hash::make($request->input('password'),   
         $fullname = $request->input('fullname');
 
         $user->nick = $nick;
@@ -41,7 +41,7 @@ class UserController extends Controller
         if($image_path){
 
             $image_path_name = time().$image_path->getClientOriginalName();
-            
+
             Storage::disk('users')->put($image_path_name,File::get($image_path));
         }
         
