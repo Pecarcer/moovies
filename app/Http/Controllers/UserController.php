@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+
 
 class UserController extends Controller
 {
@@ -12,25 +15,39 @@ class UserController extends Controller
 
     public function update(Request $request){
 
+        
         $user =\Auth::user();
         $id = $user->id;
 
         $validate = $this->validate($request, [
             'nick' => 'required|string|max:255|unique:users,nick,' . $id,
             'email' => 'required|string|email|max:255|unique:users,email,'. $id,
-            'password' => 'string|confirmed|min:8',
+            //'password' => 'string|confirmed|min:8',
             'fullname' => 'required|string'
         ]);        
         
         $nick =  $request->input('nick');
         $email =  $request->input('email');
-        $password = $request->input('password');    
+        //$password = $request->input('password');    
         $fullname = $request->input('fullname');
 
         $user->nick = $nick;
         $user->email = $email;
-        $user->password = $password;
+        //$user->password = $password;
         $user->fullname = $fullname;
+
+
+        $image_path =$request->file('avatar');
+        if($image_path){
+
+            $image_path_name = time().$image_path->getClientOriginalName();
+            
+            Storage::disk('users')->put($image_path_name,File::get($image_path));
+        }
+        
+        $user->avatar = $image_path_name;
+
+       
 
         $user->update();
 

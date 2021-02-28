@@ -17,7 +17,7 @@
         </div>
         @endif
 
-        <form method="POST" action="{{ route('user.update') }}">
+        <form method="POST" action="{{ route('user.update') }}" enctype="multipart/form-data">
             @csrf
 
             <!--Full Name -->
@@ -69,6 +69,5 @@
             </div>
         </form>
     </div>
-
 
 </x-app-layout>
