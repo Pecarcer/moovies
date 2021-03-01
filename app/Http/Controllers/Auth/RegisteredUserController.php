@@ -47,7 +47,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'role'=>"user",
             'fullname'=>$request->fullname,
-            'avatar'=>"https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png",
+            'avatar'=>"imagendefault.png",
             'remember_token' => Str::random(10),
         ]));
 

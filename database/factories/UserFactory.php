@@ -35,7 +35,7 @@ class UserFactory extends Factory
             'role'=> 'user',
             'fullname' => $name, 
             'remember_token' => Str::random(10),
-            'avatar' =>$this->faker->imageUrl()
+            'avatar' =>"imagendefault.png"
         ];
     }
 }

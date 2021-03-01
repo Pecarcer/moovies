@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
         'role'=> 'admin',
         'fullname' => 'José Carmona Cervera', 
         'remember_token' => 'rememberJCC',
-        'avatar' => 'https://cdn.iconscout.com/icon/free/png-256/avatar-373-456325.png']);
+        'avatar' => 'imagendefault.png']);
 
 
         User::factory(5)->create();

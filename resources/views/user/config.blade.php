@@ -54,7 +54,9 @@
 
                 <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" />
             </div>
-
+            
+            <br>
+            @include('includes.avatar')
             <div class="mt-4">
                 <x-label for="avatar" :value="__('Avatar')" />
 
