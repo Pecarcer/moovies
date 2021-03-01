@@ -20,35 +20,34 @@
 
         <div class="card">
             <div class="card-header font-semibold text-xl text-gray-800 leading-tight">Añadir Likes</div>
-            <form method="POST" action="{{ route('movie.save') }}" class="p-5" >
+            <form method="POST" action="{{ route('likes.save') }}" class="p-5">
                 @csrf
 
-                <!-- titulo -->
-                <div class="mt-4">
-                    <x-label for="title" :value="__('Título')" />
+                <!-- Usuario -->
+                <div>
+                    <label for="user" :value="__('Usuario')" />
 
-                    <x-input id="title" class="block mt-1 w-full" type="text" name="title" required />
+                    <select id="user" class="block mt-1 w-full" name="user">
+                        <option selected disabled> --Seleccione un Usuario--</option>";
+                        @foreach($userList as $user)
+                        <option value="{{ $user->id}}"> {{ $user->nick}}</option>
+                        @endforeach
+                    </select>
+
                 </div>
 
-                <!-- release -->
-                <div class="mt-4">
-                    <x-label for="estreno" :value="__('Estreno')" />
+                <!-- Reseña -->
 
-                    <x-input id="release" class="block mt-1 w-full" type="text" name="release" required placeholder="AAAA-MM-DD" />
-                </div>
+                <div>
+                    <label for="movie" :value="__('Reseña')" />
 
-                <!-- DIRECTOR -->
-                <div class="mt-4">
-                    <x-label for="director" :value="__('Director')" />
+                    <select id="review" class="block mt-1 w-full" name="review">
+                        <option selected disabled> --Seleccione una Reseña--</option>";
+                        @foreach($reviewList as $review)
+                        <option value="{{ $review->id}}"> Usuario: {{ $review->user->nick }} // Pelicula: {{ $review->movie->title }} // Reseña: {{ $review->opinion}}</option>
+                        @endforeach
+                    </select>
 
-                    <x-input id="director" class="block mt-1 w-full" type="text" name="director" required />
-                </div>
-                
-                <!--POSTER-->
-                <div class="mt-4">
-                    <x-label for="poster" :value="__('Poster promocional')" />
-
-                    <x-input id="poster" class="block mt-1 w-full" type="file" name="poster" />
                 </div>
 
                 <div class="flex items-center justify-end mt-4">
