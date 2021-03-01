@@ -40,12 +40,13 @@ Route::post('/user/save',[UserController::class, 'save'])->name('user.save');//p
 Route::get('/movies',[MovieController::class, 'admin'])->name('movie.admin');//para administrar pelis
 Route::post('/movie/save',[MovieController::class, 'save'])->name('movie.save');//para guardar pelis
 
-Route::get('/movie/poster/{filename}',[MovieController::class, 'getImage'])->name('movie.poster'); //para acceder al avatar de un usuario
+Route::get('/movie/poster/{filename}',[MovieController::class, 'getImage'])->name('movie.poster'); //para acceder al poster de una peli
 
 Route::get('/likes',[UserReviewController::class, 'admin'])->name('likes.admin');//para administrar los likes
 Route::post('/likes/save',[UserReviewController::class, 'save'])->name('likes.save');//para guardar likes
 
 
+//TODO RUTA CON LOS ATRIBUTOS NICK DE USUARIO Y TITULO DE PELICULA
 
 
 

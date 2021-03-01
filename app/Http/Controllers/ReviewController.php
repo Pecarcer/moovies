@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Movie;
 use App\Models\Review;
+use App\Models\User;
 
 
 class ReviewController extends Controller
@@ -17,9 +18,13 @@ class ReviewController extends Controller
     public function admin()
     {
         $movieList = Movie::all();
+        $reviewList = Review::all();
+        $userList = User::all();
 
         return view('review.admin')
-            ->with('movieList', $movieList);
+            ->with('movieList', $movieList)
+            ->with('reviewList', $reviewList)
+            ->with('userList', $userList);
     }
 
     public function save(Request $request)
