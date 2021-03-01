@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use App\Models\Movie;
@@ -14,8 +15,10 @@ class MovieController extends Controller
         $this->middleware('auth');
     }
 
-    public function admin(){        
-        return view('movie.admin');
+    public function admin(){   
+        
+        $movieList = Movie::all();
+        return view('movie.admin')->with('movieList', $movieList);;
     }
 
     public function save(Request $request)
@@ -47,5 +50,11 @@ class MovieController extends Controller
         return redirect()->route('movie.admin')->with([
             'message' => "¡La película se ha añadido correctamente!"
         ]);
+    }
+
+    public function getImage($filename)
+    {
+        $file = Storage::disk('images')->get($filename);
+        return new Response($file,200);
     }
 }

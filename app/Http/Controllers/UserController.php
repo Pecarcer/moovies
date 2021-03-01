@@ -80,12 +80,11 @@ class UserController extends Controller
     }
 
     public function admin()
-    {
-        
+    {        
         $userList = User::all();
 
         return view('user.admin')
-        ->with('userList', $userList);;
+        ->with('userList', $userList);
     }
 
     public function save(Request $request)
