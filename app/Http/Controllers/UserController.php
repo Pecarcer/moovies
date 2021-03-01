@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 
 class UserController extends Controller
@@ -70,8 +73,39 @@ class UserController extends Controller
         return view('user.profile');
     }
 
-    public function admin(){        
-        return view('user.admin');
+    public function admin(){
+        
+        $userList = User::all();
+
+        return view('user.admin')
+        ->with('userList', $userList);;
+    }
+
+    public function save(Request $request)
+    {
+
+        $this->validate($request,[
+            'nick' => 'required|string|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|confirmed|min:8',
+            'fullname' => 'required|string'
+        ]);
+
+        User::create([
+            'nick' => $request->nick,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role'=>"user",
+            'fullname'=>$request->fullname,
+            'avatar'=>"imagendefault.png",
+            'remember_token' => Str::random(10),
+        ]);
+
+        return redirect()->route('user.admin')->with([
+            'message' => "¡El usuario se ha añadido correctamente!"
+        ]);
+
+
     }
 
 }

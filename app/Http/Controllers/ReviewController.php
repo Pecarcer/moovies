@@ -25,7 +25,7 @@ class ReviewController extends Controller
     public function save(Request $request)
     {
 
-        $validate = $this->validate($request,[
+        $this->validate($request,[
             'movie' => 'required',
             'score' => 'required|integer|between:0,10',
             'opinion' => 'required'

@@ -17,7 +17,6 @@
                     </x-nav-link>
 
                     <!--SOLO SI ES ADMIN-->
-
                     <!--Usuarios-->
                     <x-nav-link :href="route('user.admin')" class="font-bold">
                         {{ __('Usuarios') }}
