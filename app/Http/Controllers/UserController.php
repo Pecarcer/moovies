@@ -112,4 +112,11 @@ class UserController extends Controller
         ]);
     }
 
+    public function getNick($id)
+    {                
+        return User::find($id)->nick;
+
+        
+    }
+
 }

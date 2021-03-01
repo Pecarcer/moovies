@@ -28,14 +28,15 @@ Route::get('/dashboard', function () {
 Route::get('/configuracion',[UserController::class, 'config'])->name('config'); //para cambiar nuestro usuario
 Route::post('/user/update',[UserController::class, 'update'])->name('user.update'); //para hacer update de nuestro usuario
 Route::get('/profile',[UserController::class, 'profile'])->name('profile'); //para cambiar nuestro usuario
-
+Route::get('/users',[UserController::class, 'admin'])->name('user.admin');//para administrar usuarios
+Route::post('/user/save',[UserController::class, 'save'])->name('user.save');//para guardar usuarios
 Route::get('/user/avatar/{filename}',[UserController::class, 'getImage'])->name('user.avatar'); //para acceder al avatar de un usuario
+//Route::get('/user/nick/{id}',[UserController::class, 'getNick'])->name('user.nick'); //para acceder al avatar de un usuario
 
 Route::get('/reviews',[ReviewController::class, 'admin'])->name('review.admin'); //para administrar reseñas
 Route::post('/review/save',[ReviewController::class, 'save'])->name('review.save'); //para guardar reseña
 
-Route::get('/users',[UserController::class, 'admin'])->name('user.admin');//para administrar usuarios
-Route::post('/user/save',[UserController::class, 'save'])->name('user.save');//para guardar usuarios
+
 
 Route::get('/movies',[MovieController::class, 'admin'])->name('movie.admin');//para administrar pelis
 Route::post('/movie/save',[MovieController::class, 'save'])->name('movie.save');//para guardar pelis
@@ -46,7 +47,7 @@ Route::get('/likes',[UserReviewController::class, 'admin'])->name('likes.admin')
 Route::post('/likes/save',[UserReviewController::class, 'save'])->name('likes.save');//para guardar likes
 
 
-//TODO RUTA CON LOS ATRIBUTOS NICK DE USUARIO Y TITULO DE PELICULA
+
 
 
 
