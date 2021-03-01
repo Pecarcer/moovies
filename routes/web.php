@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\UserReviewController;
+use App\Http\Controllers\MovieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +28,8 @@ Route::get('/dashboard', function () {
 Route::get('/configuracion',[UserController::class, 'config'])->name('config');
 Route::post('/user/update',[UserController::class, 'update'])->name('user.update');
 Route::get('/user/avatar/{filename}',[UserController::class, 'getImage'])->name('user.avatar');
+Route::get('/reviews',[ReviewController::class, 'admin'])->name('review.admin');
+Route::post('/review/save',[ReviewController::class, 'save'])->name('review.save');
 
 
 

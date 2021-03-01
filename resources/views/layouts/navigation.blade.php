@@ -30,7 +30,7 @@
                     </x-nav-link>
 
                     <!--Piezas-->
-                    <x-nav-link class="font-bold">
+                    <x-nav-link :href="route('review.admin')" class="font-bold">
                         {{ __('Reseñas') }}
                     </x-nav-link>
 
