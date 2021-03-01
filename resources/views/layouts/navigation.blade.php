@@ -18,22 +18,22 @@
 
                     <!--SOLO SI ES ADMIN-->
                     <!--Usuarios-->
-                    <x-nav-link :href="route('user.admin')" class="font-bold">
+                    <x-nav-link :href="route('user.admin')" class="font-bold" :active="request()->routeIs('user.admin')">
                         {{ __('Usuarios') }}
                     </x-nav-link>
                     
                     <!--Pelis-->
-                    <x-nav-link :href="route('movie.admin')" class="font-bold">
+                    <x-nav-link :href="route('movie.admin')" class="font-bold" :active="request()->routeIs('movie.admin')">
                         {{ __('Peliculas') }}
                     </x-nav-link>
 
                     <!--Reseñas-->
-                    <x-nav-link :href="route('review.admin')" class="font-bold">
+                    <x-nav-link :href="route('review.admin')" class="font-bold" :active="request()->routeIs('review.admin')">
                         {{ __('Reseñas') }}
                     </x-nav-link>
 
                     <!--Likes-->
-                    <x-nav-link :href="route('likes.admin')" class="font-bold">
+                    <x-nav-link :href="route('likes.admin')" class="font-bold" :active="request()->routeIs('likes.admin')">
                         {{ __('Likes') }}
                     </x-nav-link>                
 

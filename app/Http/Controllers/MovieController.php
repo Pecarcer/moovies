@@ -35,8 +35,7 @@ class MovieController extends Controller
             $image_path_name = time().$image_path->getClientOriginalName();
 
             Storage::disk('images')->put($image_path_name,File::get($image_path));
-        }        
-        
+        }                
 
         Movie::create([
             'title' => $request->title,

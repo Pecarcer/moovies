@@ -19,11 +19,14 @@ class UserController extends Controller
     {
         $this->middleware('auth');
     }
-    public function config(){
+
+    public function config()
+    {
         return view('user.config');
     }
 
-    public function update(Request $request){
+    public function update(Request $request)
+    {
         
         $user =\Auth::user();
         $id = $user->id;
@@ -65,16 +68,19 @@ class UserController extends Controller
             ->with(['message'=>'Usuario actualizado correctamente']);  
     }
 
-    public function getImage($filename){
+    public function getImage($filename)
+    {
         $file = Storage::disk('users')->get($filename);
         return new Response($file,200);
     }
 
-    public function profile(){        
+    public function profile()
+    {        
         return view('user.profile');
     }
 
-    public function admin(){
+    public function admin()
+    {
         
         $userList = User::all();
 

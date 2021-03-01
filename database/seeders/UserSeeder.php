@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
         'role'=> 'admin',
         'fullname' => 'José Carmona Cervera', 
         'remember_token' => 'rememberJCC',
-        'avatar' => 'imagendefault.png']);
+        'avatar' => 'adminicon.png']);
 
 
         User::factory(5)->create();

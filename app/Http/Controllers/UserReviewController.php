@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Review;
+use App\Models\Movie;
 
 class UserReviewController extends Controller
 {
@@ -11,7 +14,9 @@ class UserReviewController extends Controller
         $this->middleware('auth');
     }
 
-    public function admin(){        
+    public function admin(){   
+        
+        
         return view('likes.admin');
     }
 }
