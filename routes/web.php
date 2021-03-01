@@ -26,12 +26,13 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/configuracion',[UserController::class, 'config'])->name('config'); //para cambiar nuestro usuario
-Route::post('/user/update',[UserController::class, 'update'])->name('user.update'); //para hacer update de nuestro usuario
+Route::post('/user/update/{id}',[UserController::class, 'update'])->name('user.update'); //para hacer update de nuestro usuario
 Route::get('/profile',[UserController::class, 'profile'])->name('profile'); //para cambiar nuestro usuario
 Route::get('/users',[UserController::class, 'admin'])->name('user.admin');//para administrar usuarios
 Route::post('/user/save',[UserController::class, 'save'])->name('user.save');//para guardar usuarios
 Route::get('/user/avatar/{filename}',[UserController::class, 'getImage'])->name('user.avatar'); //para acceder al avatar de un usuario
 Route::get('/user/delete/{id}',[UserController::class, 'delete'])->name('user.delete');//para eliminar usuarios
+Route::get('/user/edit/{id}',[UserController::class, 'edit'])->name('user.edit');//para editar usuarios
 
 
 Route::get('/reviews',[ReviewController::class, 'admin'])->name('review.admin'); //para administrar reseñas

@@ -16,6 +16,11 @@
         </div>
         @endif
 
+        @if(session('errorMessage'))
+        <div class="alert alert-danger">
+            {{ session('errorMessage') }}
+        </div>
+        @endif
        
     <div class="card">
         <div class="card-header font-semibold text-xl text-gray-800 leading-tight">Añadir Reseña</div>

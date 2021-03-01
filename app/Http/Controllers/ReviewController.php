@@ -69,7 +69,7 @@ class ReviewController extends Controller
             
         } else{
             return redirect()->route('review.admin')->with([
-                'message' => "Reseña no encontrada"
+                'errorMessage' => "Reseña no encontrada"
             ]);
         }
     }

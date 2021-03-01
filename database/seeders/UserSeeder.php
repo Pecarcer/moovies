@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
         'nick' => 'admin',
         'email' => 'admin@gmail.com',
         'email_verified_at' => now(),
-        'password' => Hash::make("12345678"), // password
+        'password' => Hash::make("1234"), // password
         'role'=> 'admin',
         'fullname' => 'José Carmona Cervera', 
         'remember_token' => 'rememberJCC',

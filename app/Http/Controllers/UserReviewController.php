@@ -53,7 +53,7 @@ class UserReviewController extends Controller
 
         if($yaRegistrado){
             return redirect()->route('likes.admin')->with([
-                'message' => "¡A ese Usuario ya le gusta esa review!"
+                'errorMessage' => "¡A ese usuario ya le gusta esa reseña!"
             ]);    
         }else{
         

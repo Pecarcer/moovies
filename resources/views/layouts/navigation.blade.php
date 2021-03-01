@@ -65,9 +65,7 @@
 
                     <x-slot name="content">
                         <!-- Authentication -->
-                        <x-dropdown-link href="">
-                            {{'Mi perfil'}}
-                        </x-dropdown-link>
+                    
 
                         <x-dropdown-link href="{{ Route('config') }}">
                             {{'Configuración'}}

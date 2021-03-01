@@ -23,12 +23,8 @@
         </div>
         @endif
 
-
-
-        <form method="POST" action="{{ route('user.update',['id'=> Auth::user()->id]) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('user.update') }}" enctype="multipart/form-data">
             @csrf
-
-            
 
             <!--Full Name -->
             <div>

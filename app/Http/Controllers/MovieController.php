@@ -69,7 +69,7 @@ class MovieController extends Controller
             
         } else{
             return redirect()->route('movie.admin')->with([
-                'message' => "Película no encontrada"
+                'errorMessage' => "Película no encontrada"
             ]);
         }
     }
