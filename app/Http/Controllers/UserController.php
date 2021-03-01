@@ -28,15 +28,16 @@ class UserController extends Controller
         $user =\Auth::user();
         $id = $user->id;
 
-        $validate = $this->validate($request, [
+        $this->validate($request, [
             'nick' => 'required|string|max:255|unique:users,nick,' . $id,
             'email' => 'required|string|email|max:255|unique:users,email,'. $id,
             //'password' => 'string|confirmed|min:8',
-            'fullname' => 'required|string'
+            'fullname' => 'required|string',
+            //'avatar' => 'mimes:jpg,jpeg,png,gif'
         ]);        
         
 
-        //TODO ver cuando se introduce pass y cuando no
+        //TODO ver cuando se introduce pass y foto y cuando no
         $nick =  $request->input('nick');
         $email =  $request->input('email');
         //$password = Hash::make($request->input('password'),   
@@ -104,8 +105,6 @@ class UserController extends Controller
         return redirect()->route('user.admin')->with([
             'message' => "¡El usuario se ha añadido correctamente!"
         ]);
-
-
     }
 
 }
