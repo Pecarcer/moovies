@@ -10,4 +10,8 @@ class MovieController extends Controller
     {
         $this->middleware('auth');
     }
+
+    public function admin(){        
+        return view('movie.admin');
+    }
 }

@@ -16,7 +16,6 @@ class ReviewController extends Controller
 
     public function admin()
     {
-
         $movieList = Movie::all();
 
         return view('review.admin')

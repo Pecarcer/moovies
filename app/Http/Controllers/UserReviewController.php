@@ -10,4 +10,8 @@ class UserReviewController extends Controller
     {
         $this->middleware('auth');
     }
+
+    public function admin(){        
+        return view('likes.admin');
+    }
 }

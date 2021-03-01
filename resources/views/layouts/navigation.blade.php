@@ -19,23 +19,22 @@
                     <!--SOLO SI ES ADMIN-->
 
                     <!--Usuarios-->
-                    <x-nav-link class="font-bold">
+                    <x-nav-link :href="route('user.admin')" class="font-bold">
                         {{ __('Usuarios') }}
                     </x-nav-link>
-                    <!--:href="route('users')" :active="request()->routeIs('users')"-->
-
-                    <!--Materiales-->
-                    <x-nav-link class="font-bold">
+                    
+                    <!--Pelis-->
+                    <x-nav-link :href="route('movie.admin')" class="font-bold">
                         {{ __('Peliculas') }}
                     </x-nav-link>
 
-                    <!--Piezas-->
+                    <!--Reseñas-->
                     <x-nav-link :href="route('review.admin')" class="font-bold">
                         {{ __('Reseñas') }}
                     </x-nav-link>
 
-                    <!--Ventas-->
-                    <x-nav-link class="font-bold">
+                    <!--Likes-->
+                    <x-nav-link :href="route('likes.admin')" class="font-bold">
                         {{ __('Likes') }}
                     </x-nav-link>                
 
