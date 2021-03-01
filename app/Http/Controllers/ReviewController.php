@@ -33,13 +33,14 @@ class ReviewController extends Controller
         $this->validate($request,[
             'movie' => 'required',
             'score' => 'required|integer|between:0,10',
-            'opinion' => 'required'
+            'opinion' => 'required',
+            'user' => 'required'
         ]);
 
         $movie_id = $request->input('movie');
         $score = $request->input('score');
         $opinion = $request->input('opinion');
-        $user_id = \Auth::user()->id;
+        $user_id = $request->input('user');
 
         $review = new Review();
         $review->user_id = $user_id;

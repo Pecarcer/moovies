@@ -22,6 +22,19 @@
         <form method="POST" action="{{ route('review.save') }}" class="p-5">
             @csrf
 
+            <!--Usuario-->
+            <div>
+                <label for="user" :value="__('Usuario')" />
+
+                <select id="user" class="block mt-1 w-full" name="user" >
+                <option selected disabled> --Seleccione un Usuario--</option>";
+                @foreach($userList as $user)
+                    <option value="{{ $user->id}}"> {{ $user->nick}}</option>
+                @endforeach
+                </select>
+
+            </div> <br>
+
              <!--Movie -->
              <div>
                 <label for="movie" :value="__('Pelicula')" />
@@ -83,12 +96,12 @@
                                                                 
                                 <tr class="border-b border-gray-200 hover:bg-gray-100">
                                     <td class="py-3 px-6 text-left whitespace-nowrap">
-                                        <div class="flex items-center">
+                                        <div class="flex items-center justify-center">
                                             <span class="font-medium">{{$review->id}}</span>
                                         </div>
                                     </td>
                                     <td class="py-3 px-6 text-left">
-                                        <div class="flex items-center justify-center">
+                                        <div class="flex items-left ">
                                             <span>{{ $review->user->nick }}</span>                                            
                                         </div>
                                     </td>
