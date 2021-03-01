@@ -57,4 +57,20 @@ class MovieController extends Controller
         $file = Storage::disk('images')->get($filename);
         return new Response($file,200);
     }
+
+    public function delete($id)
+    {
+        if ($movie = Movie::find($id)) {
+        
+                $movie->delete();
+                return redirect()->route('movie.admin')->with([
+                    'message' => "¡Pelicula eliminada correctamente!"
+                ]);
+            
+        } else{
+            return redirect()->route('movie.admin')->with([
+                'message' => "Película no encontrada"
+            ]);
+        }
+    }
 }

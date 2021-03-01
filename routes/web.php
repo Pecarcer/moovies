@@ -31,20 +31,25 @@ Route::get('/profile',[UserController::class, 'profile'])->name('profile'); //pa
 Route::get('/users',[UserController::class, 'admin'])->name('user.admin');//para administrar usuarios
 Route::post('/user/save',[UserController::class, 'save'])->name('user.save');//para guardar usuarios
 Route::get('/user/avatar/{filename}',[UserController::class, 'getImage'])->name('user.avatar'); //para acceder al avatar de un usuario
-//Route::get('/user/nick/{id}',[UserController::class, 'getNick'])->name('user.nick'); //para acceder al avatar de un usuario
+Route::get('/user/delete/{id}',[UserController::class, 'delete'])->name('user.delete');//para eliminar usuarios
+
 
 Route::get('/reviews',[ReviewController::class, 'admin'])->name('review.admin'); //para administrar reseñas
 Route::post('/review/save',[ReviewController::class, 'save'])->name('review.save'); //para guardar reseña
+Route::get('/reviews/delete/{id}',[ReviewController::class, 'delete'])->name('review.delete'); //para eliminar reseñas
 
 
 
 Route::get('/movies',[MovieController::class, 'admin'])->name('movie.admin');//para administrar pelis
 Route::post('/movie/save',[MovieController::class, 'save'])->name('movie.save');//para guardar pelis
+Route::get('/movie/delete/{id}',[MovieController::class, 'delete'])->name('movie.delete');//para eliminar pelis
 
 Route::get('/movie/poster/{filename}',[MovieController::class, 'getImage'])->name('movie.poster'); //para acceder al poster de una peli
 
 Route::get('/likes',[UserReviewController::class, 'admin'])->name('likes.admin');//para administrar los likes
 Route::post('/likes/save',[UserReviewController::class, 'save'])->name('likes.save');//para guardar likes
+Route::get('/likes/delete/{id}',[UserReviewController::class, 'delete'])->name('likes.delete');//para eliminar los likes
+
 
 
 

@@ -27,18 +27,18 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-        
-        $user =\Auth::user();
+
+        $user = \Auth::user();
         $id = $user->id;
 
         $this->validate($request, [
             'nick' => 'required|string|max:255|unique:users,nick,' . $id,
-            'email' => 'required|string|email|max:255|unique:users,email,'. $id,
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
             //'password' => 'string|confirmed|min:8',
             'fullname' => 'required|string',
             //'avatar' => 'mimes:jpg,jpeg,png,gif'
-        ]);        
-        
+        ]);
+
 
         //TODO ver cuando se introduce pass y foto y cuando no
         $nick =  $request->input('nick');
@@ -52,45 +52,45 @@ class UserController extends Controller
         $user->fullname = $fullname;
 
 
-        $image_path =$request->file('avatar');
-        if($image_path){
+        $image_path = $request->file('avatar');
+        if ($image_path) {
 
-            $image_path_name = time().$image_path->getClientOriginalName();
+            $image_path_name = time() . $image_path->getClientOriginalName();
 
-            Storage::disk('users')->put($image_path_name,File::get($image_path));
+            Storage::disk('users')->put($image_path_name, File::get($image_path));
         }
-        
-        $user->avatar = $image_path_name;       
+
+        $user->avatar = $image_path_name;
 
         $user->update();
 
         return redirect()->route('config')
-            ->with(['message'=>'Usuario actualizado correctamente']);  
+            ->with(['message' => 'Usuario actualizado correctamente']);
     }
 
     public function getImage($filename)
     {
         $file = Storage::disk('users')->get($filename);
-        return new Response($file,200);
+        return new Response($file, 200);
     }
 
     public function profile()
-    {        
+    {
         return view('user.profile');
     }
 
     public function admin()
-    {        
+    {
         $userList = User::all();
 
         return view('user.admin')
-        ->with('userList', $userList);
+            ->with('userList', $userList);
     }
 
     public function save(Request $request)
     {
 
-        $this->validate($request,[
+        $this->validate($request, [
             'nick' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
@@ -101,9 +101,9 @@ class UserController extends Controller
             'nick' => $request->nick,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role'=>"user",
-            'fullname'=>$request->fullname,
-            'avatar'=>"imagendefault.png",
+            'role' => "user",
+            'fullname' => $request->fullname,
+            'avatar' => "imagendefault.png",
             'remember_token' => Str::random(10),
         ]);
 
@@ -112,11 +112,26 @@ class UserController extends Controller
         ]);
     }
 
-    public function getNick($id)
-    {                
-        return User::find($id)->nick;
+    public function delete($id)
+    {
 
-        
+        if ($user = User::find($id)) {
+
+            if ($user->id == \Auth::user()->id) {
+
+                return redirect()->route('user.admin')->with([
+                    'message' => "¡No puedes eliminarte a ti mismo!"
+                ]);
+            } else {
+                $user->delete();
+                return redirect()->route('user.admin')->with([
+                    'message' => "¡Usuario eliminado correctamente!"
+                ]);
+            }
+        } else {
+            return redirect()->route('user.admin')->with([
+                'message' => "Usuario no encontrado"
+            ]);
+        }
     }
-
 }

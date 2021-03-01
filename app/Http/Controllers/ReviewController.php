@@ -56,4 +56,21 @@ class ReviewController extends Controller
 
 
     }
+
+    public function delete($id)
+    {
+
+        if ($review = Review::find($id)) {
+        
+                $review->delete();
+                return redirect()->route('review.admin')->with([
+                    'message' => "¡Reseña eliminada correctamente!"
+                ]);
+            
+        } else{
+            return redirect()->route('review.admin')->with([
+                'message' => "Reseña no encontrada"
+            ]);
+        }
+    }
 }
