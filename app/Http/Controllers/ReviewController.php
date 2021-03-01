@@ -34,13 +34,13 @@ class ReviewController extends Controller
             'movie' => 'required',
             'score' => 'required|integer|between:0,10',
             'opinion' => 'required',
-            'user' => 'required'
+            'usuario' => 'required'
         ]);
 
         $movie_id = $request->input('movie');
         $score = $request->input('score');
         $opinion = $request->input('opinion');
-        $user_id = $request->input('user');
+        $user_id = $request->input('usuario');
 
         $review = new Review();
         $review->user_id = $user_id;

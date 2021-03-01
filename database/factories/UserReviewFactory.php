@@ -24,7 +24,7 @@ class UserReviewFactory extends Factory
     {
         return [
             'user_id' => $this->faker->numberBetween(1,User::count()),
-            'review_id'=> $this->faker->numberBetween(1,Review::count()),
+            'review_id'=> $this->faker->unique()->numberBetween(1,Review::count()),
         ];
     }
 }

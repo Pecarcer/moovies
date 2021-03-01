@@ -32,12 +32,31 @@ class UserReviewController extends Controller
     {
 
         $this->validate($request,[
-            'user' => 'required',
+            'usuario' => 'required',
             'review' => 'required',
         ]);
 
-        $user_id = $request->input('user');
+        //todo que no meta duplicados
+
+        $user_id = $request->input('usuario');
         $review_id = $request->input('review');
+
+        $likes = UserReview::all();
+
+        $yaRegistrado=false;
+
+        foreach ($likes as $like) {
+            if($like->user_id == $user_id && $like->review_id == $review_id){
+                $yaRegistrado=true;
+            }
+        }
+
+        if($yaRegistrado){
+            return redirect()->route('likes.admin')->with([
+                'message' => "¡A ese Usuario ya le gusta esa review!"
+            ]);    
+        }else{
+        
 
         $like = new UserReview();
         $like->user_id = $user_id;
@@ -47,6 +66,7 @@ class UserReviewController extends Controller
         return redirect()->route('likes.admin')->with([
             'message' => "¡El nuevo like se ha subido correctamente!"
         ]);
+        }
 
 
     }

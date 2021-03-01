@@ -43,7 +43,7 @@
 
                     <x-input id="director" class="block mt-1 w-full" type="text" name="director" required />
                 </div>
-                
+
                 <!--POSTER-->
                 <div class="mt-4">
                     <x-label for="poster" :value="__('Poster promocional')" />
@@ -80,8 +80,8 @@
 
                                 @foreach($movieList as $movie)
 
-                               
-                                                                
+
+
                                 <tr class="border-b border-gray-200 hover:bg-gray-100">
                                     <td class="py-3 px-6 text-left whitespace-nowrap">
                                         <div class="flex items-center">
@@ -99,24 +99,24 @@
                                             <span>{{$movie->release}}</span>
                                         </div>
                                     </td>
-                                    <td class="py-3 px-6 text-center">                                        
-                                        <span class="flex items-center justify-center"> {{$movie->director}} </span>  
+                                    <td class="py-3 px-6 text-center">
+                                        <span class="flex items-center justify-center"> {{$movie->director}} </span>
                                     </td>
-                                  
+
                                     <td class="py-3 px-6 text-center">
                                         <div class="flex items-center justify-center">
                                             <span>
 
-                                            @if($movie->poster)
+                                                @if($movie->poster)
                                                 <img src="{{ route('movie.poster',['filename'=>$movie->poster]) }}" width="80" height="100">
-                                            @endif
+                                                @endif
 
                                             </span>
                                         </div>
                                     </td>
                                     <td class="py-3 px-6 text-center">
                                         <div class="flex item-center justify-center">
-                                            
+
                                             <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -139,11 +139,5 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
     </div>
-
 </x-app-layout>

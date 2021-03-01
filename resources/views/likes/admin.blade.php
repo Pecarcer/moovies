@@ -25,9 +25,9 @@
 
                 <!-- Usuario -->
                 <div>
-                    <label for="user" :value="__('Usuario')" />
+                    <label for="usuario" :value="__('Usuario')" />
 
-                    <select id="user" class="block mt-1 w-full" name="user">
+                    <select id="usuario" class="block mt-1 w-full" name="usuario">
                         <option selected disabled> --Seleccione un Usuario--</option>";
                         @foreach($userList as $user)
                         <option value="{{ $user->id}}"> {{ $user->nick}}</option>
@@ -58,6 +58,30 @@
                 </div>
             </form>
         </div>
+    </div>
+
+    <div>
+        @foreach($userList as $user)
+            <div>
+                <p> Al usuario {{ $user->nick }} le han gustado las siguientes reviews:</p>
+                @foreach($likes as $like)
+                    @if($like->user_id == $user->id)
+                    -------
+                        @foreach($reviewList as $review)
+                            @if($like->review_id == $review->id)  
+                            Autor: {{ $review->user->nick }}
+                            Pelicula: {{ $review->movie->title }}
+                            Reseña: {{ $review->opinion}}
+                            @endif  
+
+                        @endforeach                      
+
+                    -------    <br>
+                    @endif   <br>     
+                @endforeach
+
+            </div>
+        @endforeach
     </div>
 
 </x-app-layout>
