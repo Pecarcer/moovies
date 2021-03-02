@@ -129,4 +129,20 @@ class UserReviewController extends Controller
                 ->with(['errorMessage' => 'No se encontró el like']);
         }
     }
+
+
+    public function delete($id)
+    {
+        if ($like = UserReview::find($id)) {
+
+            $like->delete();
+            return redirect()->route('likes.admin')->with([
+                'message' => "¡Like eliminado correctamente!"
+            ]);
+        } else {
+            return redirect()->route('likes.admin')->with([
+                'errorMessage' => "Like no encontrado"
+            ]);
+        }
+    }
 }

@@ -2,7 +2,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Peliculas') }}
+            {{ __('Editar Peliculas') }}
         </h2>
     </x-slot>
 
@@ -23,8 +23,8 @@
         </div>
         @endif
 
+        
         <div class="card">
-            <div class="card-header font-semibold text-xl text-gray-800 leading-tight">Editar Pelicula</div>
             <form method="POST" action="{{ route('movie.update',['id'=> $movie->id]) }}" class="p-5" enctype="multipart/form-data">
                 @csrf
 
@@ -66,6 +66,7 @@
                 </div>
             </form>
         </div>
+       
     </div>
 
 </x-app-layout>
