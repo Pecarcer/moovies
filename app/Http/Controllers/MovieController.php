@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use App\Models\Movie;
+use Illuminate\Support\Facades\DB;
 
 class MovieController extends Controller
 {
@@ -17,9 +18,17 @@ class MovieController extends Controller
 
     public function admin()
     {
+        $movieList = new Movie;
 
-        $movieList = Movie::all();
-        return view('movie.admin')->with('movieList', $movieList);;
+        if (request()->has('sort')) {
+            $movieList = $movieList->orderBy(request('sort'));
+        }
+
+        $movieList = $movieList->paginate(4)->appends([
+            'sort' => request('sort')
+        ]);
+
+        return view('movie.admin')->with('movieList', $movieList);
     }
 
     public function save(Request $request)
@@ -100,7 +109,7 @@ class MovieController extends Controller
             ]);
 
 
-            
+
             $title =  $request->input('title');
             $release =  $request->input('release');
             $director = $request->input('director');

@@ -24,11 +24,22 @@
         </div>
         @endif
 
+
         <!-- component -->
         <div class="overflow-x-auto">
+
             <div class="min-w-screen min-h-screen bg-gray-100 flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
                 <div class="w-full lg:w-5/6">
                     <div class="bg-white shadow-md rounded my-6">
+                        <div class="row">
+                            <div class="col-md-6">
+                                Ordenar por:
+                                <a href="{{ route('movie.admin') }}"> Id</a> |
+                                <a href="{{ route('movie.admin', [ 'sort' => 'title']) }}"> Titulo</a> |
+                                <a href="{{ route('movie.admin', [ 'sort' => 'release']) }}"> Estreno</a>
+                            </div>
+
+                        </div>
                         <table class="min-w-max w-full table-auto">
                             <thead>
                                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
@@ -43,8 +54,6 @@
                             <tbody class="text-gray-600 text-sm font-light">
 
                                 @foreach($movieList as $movie)
-
-
 
                                 <tr class="border-b border-gray-200 hover:bg-gray-100">
                                     <td class="py-3 px-6 text-left whitespace-nowrap">
@@ -78,7 +87,7 @@
                                             </span>
                                         </div>
                                     </td>
-                                    <td class="py-3 px-6 text-center">  
+                                    <td class="py-3 px-6 text-center">
                                         <a href="{{ route('movie.delete', ['id'=> $movie->id]) }}"> <i class="fas fa-trash fa-2x"></i></a>
                                         &nbsp;
                                         &nbsp;
@@ -90,6 +99,7 @@
 
                             </tbody>
                         </table>
+                        {{ $movieList->links() }}
                     </div>
                 </div>
             </div>

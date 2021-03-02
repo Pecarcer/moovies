@@ -40,8 +40,6 @@ class UserController extends Controller
             'fullname' => 'required|string',
             'avatar' => 'mimes:jpg,jpeg,png,gif'
         ]);
-
-
        
         $nick =  $request->input('nick');
         $email =  $request->input('email');
@@ -94,7 +92,9 @@ class UserController extends Controller
     public function admin()
     {
 
+        
         $userList = new User;
+
 
         if(request()->has('role')){
             $userList = $userList->where('role',request('role'));
@@ -108,6 +108,7 @@ class UserController extends Controller
             'role' => request('role'),
             'sort' => request('sort')
         ]);
+
 
         return view('user.admin')
         ->with('userList', $userList);
