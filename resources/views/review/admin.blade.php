@@ -27,7 +27,7 @@
         <div class="overflow-x-auto">
             <div class="min-w-screen min-h-screen bg-gray-100 flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
                 <div class="w-full lg:w-5/6">
-                    <div class="bg-white shadow-md rounded my-6">
+                    <div class="bg-white shadow-md rounded my-6">                    
                         <table class="min-w-max w-full table-auto">
                             <thead>
                                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
@@ -53,21 +53,21 @@
                                     </td>
                                     <td class="py-3 px-6 text-left">
                                         <div class="flex items-left ">
-                                            <span>{{ $review->user->nick }}</span>
+                                        <span>{{ $review->user->nick }}</span>                                           
                                         </div>
                                     </td>
                                     <td class="py-3 px-6 text-center">
                                         <div class="flex items-center justify-center">
-                                            <span>{{ $review->movie->title }}</span>
+                                        <span>{{ $review->movie->title }}</span>                                          
                                         </div>
                                     </td>
                                     <td class="py-3 px-6 text-center">
-                                        <span class="flex items-center justify-center"> {{$review->score}} </span>
+                                    <span class="flex items-center justify-center"> {{$review->score}} </span>
                                     </td>
 
                                     <td class="py-3 px-6 text-center">
                                         <div class="flex items-center justify-center">
-                                            <span class="flex items-center justify-center"> {{$review->opinion}} </span>
+                                        <span class="flex items-center justify-center"> {{$review->opinion}} </span>
                                         </div>
                                     </td>
                                     <td class="py-3 px-6 text-center">
@@ -81,7 +81,7 @@
                                 @endforeach
 
                             </tbody>
-                        </table>
+                        </table>                     
                     </div>
                 </div>
             </div>

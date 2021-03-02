@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Movie;
 use App\Models\Review;
 use App\Models\User;
-
+use App\Models\UserReview;
 
 class ReviewController extends Controller
 {
@@ -20,12 +20,29 @@ class ReviewController extends Controller
         $movieList = Movie::all();
         $reviewList = Review::all();
         $userList = User::all();
+        /*$reviewListConsulta = Review::all();
+
+        $reviewList = new UserReview();
+
+        if (request()->has('sort')) {
+            $reviewList = $reviewList->orderBy(request('sort'));
+        }else{
+            $reviewList = $reviewList->orderBy('id');    
+        }
+
+        $reviewList = $reviewList->paginate(4)->appends([
+            'sort' => request('sort')
+        ]);
+*/
 
         return view('review.admin')
             ->with('movieList', $movieList)
+            //->with('reviewListConsulta', $reviewListConsulta)
             ->with('reviewList', $reviewList)
             ->with('userList', $userList);
     }
+
+
 
     public function save(Request $request)
     {
@@ -101,7 +118,6 @@ class ReviewController extends Controller
                 'opinion' => 'string|required',
                 'usuario' => 'required'
             ]);
-
 
          
             $movie =  $request->input('movie');
