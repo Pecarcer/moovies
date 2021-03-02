@@ -22,7 +22,11 @@ Route::get('/', function () {
 })->middleware('guest');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $respuesta = Http::get('https://api.themoviedb.org/3/movie/popular?api_key=edf076d294602538c83c3c184f3539e1&language=es-SP&page=1');
+    $movieReviews = $respuesta->json();
+    
+    return view('dashboard',compact('movieReviews'));
+    
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/configuracion',[UserController::class, 'config'])->name('config'); //para cambiar nuestro usuario

@@ -42,7 +42,7 @@ class UserController extends Controller
         ]);
 
 
-        //TODO ver cuando se introduce pass y foto y cuando no
+       
         $nick =  $request->input('nick');
         $email =  $request->input('email');
 

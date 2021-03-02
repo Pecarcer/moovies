@@ -35,8 +35,7 @@ class UserReviewController extends Controller
             'review' => 'required',
         ]);
 
-        //todo que no meta duplicados
-
+      
         $user_id = $request->input('usuario');
         $review_id = $request->input('review');
 

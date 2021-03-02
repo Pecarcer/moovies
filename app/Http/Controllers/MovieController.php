@@ -100,7 +100,7 @@ class MovieController extends Controller
             ]);
 
 
-            //TODO ver cuando se introduce pass y foto y cuando no
+            
             $title =  $request->input('title');
             $release =  $request->input('release');
             $director = $request->input('director');

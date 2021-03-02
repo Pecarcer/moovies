@@ -103,7 +103,7 @@ class ReviewController extends Controller
             ]);
 
 
-            //TODO ver cuando se introduce pass y foto y cuando no
+         
             $movie =  $request->input('movie');
             $score =  $request->input('score');
             $opinion = $request->input('opinion');
