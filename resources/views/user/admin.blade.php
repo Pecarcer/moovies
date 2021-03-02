@@ -8,8 +8,10 @@
 
 
     <!-- Validation Errors -->
-    <x-auth-validation-errors class="p-20 center-block" :errors="$errors" />
+    
     <div class="p-20 center-block">
+
+    <x-auth-validation-errors class="p-20 center-block" :errors="$errors" />
 
         @if(session('message'))
         <div class="alert alert-success">
@@ -150,6 +152,7 @@
 
                             </tbody>
                         </table>
+                        {{ $userList->links() }}
                     </div>
                 </div>
             </div>

@@ -93,7 +93,7 @@ class UserController extends Controller
 
     public function admin()
     {
-        $userList = User::all();
+        $userList = User::paginate(2);
 
         return view('user.admin')
             ->with('userList', $userList);

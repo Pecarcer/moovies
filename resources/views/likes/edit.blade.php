@@ -7,9 +7,9 @@
     </x-slot>
 
 
+    <div class="p-20 center-block">    
     <!-- Validation Errors -->
     <x-auth-validation-errors class="p-20 center-block" :errors="$errors" />
-    <div class="p-20 center-block">
 
         @if(session('message'))
         <div class="alert alert-success">

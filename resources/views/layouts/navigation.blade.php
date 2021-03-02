@@ -16,7 +16,7 @@
                         {{ __('Inicio') }}
                     </x-nav-link>
 
-                    <!--SOLO SI ES ADMIN-->
+                
                     <!--Usuarios-->
                     <x-nav-link :href="route('user.admin')" class="font-bold" :active="request()->routeIs('user.admin')">
                         {{ __('Usuarios') }}
