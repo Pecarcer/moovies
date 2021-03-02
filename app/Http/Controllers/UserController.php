@@ -93,10 +93,25 @@ class UserController extends Controller
 
     public function admin()
     {
-        $userList = User::paginate(2);
+
+        $userList = new User;
+
+        if(request()->has('role')){
+            $userList = $userList->where('role',request('role'));
+        }
+
+        if(request()->has('sort')){
+            $userList = $userList->orderBy('id',request('sort'));
+        }
+
+        $userList = $userList->paginate(4)->appends([
+            'role' => request('role'),
+            'sort' => request('sort')
+        ]);
 
         return view('user.admin')
-            ->with('userList', $userList);
+        ->with('userList', $userList);
+
     }
 
     public function save(Request $request)

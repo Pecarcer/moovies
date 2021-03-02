@@ -6,9 +6,8 @@
         </h2>
     </x-slot>
 
-
-
     <div class="p-20 center-block">
+
         <!-- Validation Errors -->
         <x-auth-validation-errors class="p-20 center-block" :errors="$errors" />
 
@@ -24,7 +23,50 @@
         </div>
         @endif
 
+        @foreach($userList as $user)
+        
+        <div class="card">
+            <table class="min-w-max w-full table-auto">
+                <thead>
+                    <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                        <th class="py-3 px-6 text-left">Likes de {{$user->nick}}</th>
+                        <th class="py-3 px-6 text-left">Autor</th>
+                        <th class="py-3 px-6 text-center">Pelicula</th>
+                        <th class="py-3 px-6 text-center">Reseña</th>
+                        <th class="py-3 px-6 text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
 
+                    @foreach($likes as $like)
+                    @if($like->user_id == $user->id)
+                    @foreach($reviewList as $review)
+                    @if($like->review_id == $review->id)
+                    <tr class="text-center">
+                        <td class="text-center"></td>
+                        <td class="text-center">{{ $review->user->nick }}</td>
+                        <td class="text-center">{{ $review->movie->title }}</td>
+                        <td class="text-center">{{ $review->opinion}}</td>
+                        <td>
+                            <a href="{{ route('likes.delete', ['id'=> $like->id]) }}"> <i class="fas fa-trash fa-2x"></i></a>
+                            &nbsp;
+                            &nbsp;
+                            <a href="{{ route('likes.edit', ['id'=> $like->id]) }}"> <i class="fas fa-pencil-alt fa-2x"> </i> </a>
+                        </td>
+                    </tr>
+                    @endif
+                    @endforeach
+                    @endif
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <br><br>
+        @endforeach
+    </div>
+
+
+    <div class="p-20 center-block">
         <div class="card">
             <div class="card-header font-semibold text-xl text-gray-800 leading-tight">Añadir Likes</div>
             <form method="POST" action="{{ route('likes.save') }}" class="p-5">
@@ -67,80 +109,7 @@
         </div>
     </div>
 
-    <div class="p-20 center-block">
-        @foreach($userList as $user)
-            <div class="card"> 
-                    <table class="min-w-max w-full table-auto">
-                        <thead>
-                            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                                <th class="py-3 px-6 text-left">Likes de {{$user->nick}}</th>
-                                <th class="py-3 px-6 text-left">Autor</th>
-                                <th class="py-3 px-6 text-center">Pelicula</th>
-                                <th class="py-3 px-6 text-center">Reseña</th>
-                                <th class="py-3 px-6 text-center">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-center">
-
-                            @foreach($likes as $like)
-                                @if($like->user_id == $user->id)
-                                    @foreach($reviewList as $review)
-                                        @if($like->review_id == $review->id)
-                                            <tr class="text-center">
-                                                <td class="text-center"></td>
-                                                <td class="text-center">{{ $review->user->nick }}</td>
-                                                <td class="text-center">{{ $review->movie->title }}</td>
-                                                <td class="text-center">{{ $review->opinion}}</td>
-                                                <td>
-                                                <a href="{{ route('likes.delete', ['id'=> $like->id]) }}"> <i class="fas fa-trash fa-2x"></i></a>
-                                                        &nbsp;
-                                                        &nbsp;
-                                                        <a href="{{ route('likes.edit', ['id'=> $like->id]) }}"> <i class="fas fa-pencil-alt fa-2x"> </i> </a>
-                                                </td>
-                                            </tr>
-                                        @endif
-                                    @endforeach
-                                @endif
-                            @endforeach
-                        </tbody>
-                    </table>
-            </div>
-        <br><br>
-        @endforeach
-    </div>
-
 
 
 
 </x-app-layout>
-
-<!--
-    <div>
-        @foreach($userList as $user)
-            <div>
-
-
-                <p> Al usuario {{ $user->nick }} le han gustado las siguientes reviews:</p>
-                @foreach($likes as $like)
-                    @if($like->user_id == $user->id)
-                    -------
-                        @foreach($reviewList as $review)
-                            @if($like->review_id == $review->id)  
-                            Autor: {{ $review->user->nick }}
-                            Pelicula: {{ $review->movie->title }}
-                            Reseña: {{ $review->opinion}}
-                            @endif  
-
-                        @endforeach                      
-
-                    -------    <br>
-                    @endif   <br>     
-                @endforeach
-
-            </div>
-        @endforeach
-    </div>    
-
-
-
--->

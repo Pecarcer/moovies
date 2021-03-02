@@ -24,49 +24,6 @@
         </div>
         @endif
 
-
-        <div class="card">
-            <div class="card-header font-semibold text-xl text-gray-800 leading-tight">Añadir Pelicula</div>
-            <form method="POST" action="{{ route('movie.save') }}" class="p-5" enctype="multipart/form-data">
-                @csrf
-
-                <!-- titulo -->
-                <div class="mt-4">
-                    <x-label for="title" :value="__('Título')" />
-
-                    <x-input id="title" class="block mt-1 w-full" type="text" name="title" required />
-                </div>
-
-                <!-- release -->
-                <div class="mt-4">
-                    <x-label for="estreno" :value="__('Estreno')" />
-
-                    <x-input id="release" class="block mt-1 w-full" type="text" name="release" required placeholder="AAAA-MM-DD" />
-                </div>
-
-                <!-- DIRECTOR -->
-                <div class="mt-4">
-                    <x-label for="director" :value="__('Director')" />
-
-                    <x-input id="director" class="block mt-1 w-full" type="text" name="director" required />
-                </div>
-
-                <!--POSTER-->
-                <div class="mt-4">
-                    <x-label for="poster" :value="__('Poster promocional')" />
-
-                    <x-input id="poster" class="block mt-1 w-full" type="file" name="poster" />
-                </div>
-
-                <div class="flex items-center justify-end mt-4">
-                    <x-button class="ml-4">
-                        {{ __('Añadir') }}
-                    </x-button>
-                </div>
-            </form>
-        </div>
-
-
         <!-- component -->
         <div class="overflow-x-auto">
             <div class="min-w-screen min-h-screen bg-gray-100 flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
@@ -136,6 +93,49 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <br><br><br>
+
+
+        <div class="card">
+            <div class="card-header font-semibold text-xl text-gray-800 leading-tight">Añadir Pelicula</div>
+            <form method="POST" action="{{ route('movie.save') }}" class="p-5" enctype="multipart/form-data">
+                @csrf
+
+                <!-- titulo -->
+                <div class="mt-4">
+                    <x-label for="title" :value="__('Título')" />
+
+                    <x-input id="title" class="block mt-1 w-full" type="text" name="title" required />
+                </div>
+
+                <!-- release -->
+                <div class="mt-4">
+                    <x-label for="estreno" :value="__('Estreno')" />
+
+                    <x-input id="release" class="block mt-1 w-full" type="text" name="release" required placeholder="AAAA-MM-DD" />
+                </div>
+
+                <!-- DIRECTOR -->
+                <div class="mt-4">
+                    <x-label for="director" :value="__('Director')" />
+
+                    <x-input id="director" class="block mt-1 w-full" type="text" name="director" required />
+                </div>
+
+                <!--POSTER-->
+                <div class="mt-4">
+                    <x-label for="poster" :value="__('Poster promocional')" />
+
+                    <x-input id="poster" class="block mt-1 w-full" type="file" name="poster" />
+                </div>
+
+                <div class="flex items-center justify-end mt-4">
+                    <x-button class="ml-4">
+                        {{ __('Añadir') }}
+                    </x-button>
+                </div>
+            </form>
         </div>
     </div>
 </x-app-layout>

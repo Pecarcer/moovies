@@ -6,12 +6,11 @@
         </h2>
     </x-slot>
 
-
-    <!-- Validation Errors -->
+    
     
     <div class="p-20 center-block">
-
-    <x-auth-validation-errors class="p-20 center-block" :errors="$errors" />
+        <!-- Validation Errors -->
+        <x-auth-validation-errors class="p-20 center-block" :errors="$errors" />
 
         @if(session('message'))
         <div class="alert alert-success">
@@ -24,61 +23,31 @@
             {{ session('errorMessage') }}
         </div>
         @endif
-
-
-        <div class="card">
-            <div class="card-header font-semibold text-xl text-gray-800 leading-tight">Añadir Usuario</div>
-            <form method="POST" action="{{ route('user.save') }}" class="p-5">
-                @csrf
-
-                <!--Full Name -->
-                <div>
-                    <x-label for="fullname" :value="__('Nombre Completo')" />
-
-                    <x-input id="fullname" class="block mt-1 w-full" type="text" name="fullname" value="" required autofocus />
-                </div>
-
-                <!-- Nick -->
-                <div class="mt-4">
-                    <x-label for="nick" :value="__('Nickname')" />
-
-                    <x-input id="nick" class="block mt-1 w-full" type="text" name="nick" value="" required autofocus />
-                </div>
-
-                <!-- Email Address -->
-                <div class="mt-4">
-                    <x-label for="email" :value="__('Email')" />
-
-                    <x-input id="email" class="block mt-1 w-full" type="email" name="email" value="" required />
-                </div>
-
-                <!-- Password -->
-                <div class="mt-4">
-                    <x-label for="password" :value="__('Contraseña')" />
-
-                    <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-                </div>
-
-                <!-- Confirm Password -->
-                <div class="mt-4">
-                    <x-label for="password_confirmation" :value="__('Confirma Contraseña')" />
-
-                    <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required />
-                </div>
-
-                <div class="flex items-center justify-end mt-4">
-                    <x-button class="ml-4">
-                        {{ __('Añadir') }}
-                    </x-button>
-                </div>
-            </form>
-        </div>
-
-        <!-- component -->
+        
+       <!-- component -->
         <div class="overflow-x-auto">
             <div class="min-w-screen min-h-screen bg-gray-100 flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
                 <div class="w-full lg:w-5/6">
                     <div class="bg-white shadow-md rounded my-6">
+
+                   
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            Filtrado por rol:
+                            <a href="/users/?role=admin">Admins</a> |
+                            <a href="/users/?role=user">Users</a> |
+                            <a href="/users">Todos</a>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            Orden:
+                                <a href="{{ route('user.admin', ['role' => request('role'), 'sort' => 'asc']) }}"> Ascendente</a>
+                                <a href="{{ route('user.admin', ['role' => request('role'), 'sort' => 'desc']) }}"> Descendente</a>
+                        
+                        </div>
+                    </div>
+
+
                         <table class="min-w-max w-full table-auto">
                             <thead>
                                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
@@ -157,5 +126,53 @@
                 </div>
             </div>
         </div> <!-- fin tabla-->
+
+        <div class="card">
+            <div class="card-header font-semibold text-xl text-gray-800 leading-tight">Añadir Usuario</div>
+            <form method="POST" action="{{ route('user.save') }}" class="p-5">
+                @csrf
+
+                <!--Full Name -->
+                <div>
+                    <x-label for="fullname" :value="__('Nombre Completo')" />
+
+                    <x-input id="fullname" class="block mt-1 w-full" type="text" name="fullname" value="" required autofocus />
+                </div>
+
+                <!-- Nick -->
+                <div class="mt-4">
+                    <x-label for="nick" :value="__('Nickname')" />
+
+                    <x-input id="nick" class="block mt-1 w-full" type="text" name="nick" value="" required autofocus />
+                </div>
+
+                <!-- Email Address -->
+                <div class="mt-4">
+                    <x-label for="email" :value="__('Email')" />
+
+                    <x-input id="email" class="block mt-1 w-full" type="email" name="email" value="" required />
+                </div>
+
+                <!-- Password -->
+                <div class="mt-4">
+                    <x-label for="password" :value="__('Contraseña')" />
+
+                    <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="mt-4">
+                    <x-label for="password_confirmation" :value="__('Confirma Contraseña')" />
+
+                    <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required />
+                </div>
+
+                <div class="flex items-center justify-end mt-4">
+                    <x-button class="ml-4">
+                        {{ __('Añadir') }}
+                    </x-button>
+                </div>
+            </form>
+        </div>
     </div>
 </x-app-layout>
