@@ -20,6 +20,7 @@ class ReviewController extends Controller
         $movieList = Movie::all();
         $reviewList = Review::all();
         $userList = User::all();
+
         /*$reviewListConsulta = Review::all();
 
         $reviewList = new UserReview();
@@ -51,13 +52,13 @@ class ReviewController extends Controller
             'movie' => 'required',
             'score' => 'required|integer|between:0,10',
             'opinion' => 'string|required',
-            'usuario' => 'required'
+            'user' => 'required'
         ]);
 
         $movie_id = $request->input('movie');
         $score = $request->input('score');
         $opinion = $request->input('opinion');
-        $user_id = $request->input('usuario');
+        $user_id = $request->input('user');
 
         $review = new Review();
         $review->user_id = $user_id;
@@ -65,11 +66,29 @@ class ReviewController extends Controller
         $review->score = $score;
         $review->opinion = $opinion;
 
-        $review->save();
 
-        return redirect()->route('review.admin')->with([
-            'message' => "¡La reseña se ha subido correctamente!"
-        ]);
+        $reviewList = Review::all();
+        $yaHecha = false;
+
+        foreach ($reviewList as $reviewHecha) {
+            if ($reviewHecha->user_id == $review->user_id && $reviewHecha->movie_id == $review->movie_id) {
+                $yaHecha = true;
+            }
+        }
+
+        if ($yaHecha) {
+
+            return redirect()->route('review.admin')->with([
+                'errorMessage' => "Ese usuario ya ha reseñado esa película"
+            ]);
+        } else {
+
+            $review->save();
+
+            return redirect()->route('review.admin')->with([
+                'message' => "¡La reseña se ha subido correctamente!"
+            ]);
+        }
     }
 
     public function delete($id)
@@ -97,7 +116,7 @@ class ReviewController extends Controller
             $movieList = Movie::all();
             $userList = User::all();
 
-            return view('review.edit', ['review' => $review, 'movieList'=>$movieList, 'userList'=>$userList]);
+            return view('review.edit', ['review' => $review, 'movieList' => $movieList, 'userList' => $userList]);
         } else {
             return redirect()->route('review.admin')->with([
                 'errorMessage' => "Reseña no encontrada"
@@ -119,7 +138,7 @@ class ReviewController extends Controller
                 'usuario' => 'required'
             ]);
 
-         
+
             $movie =  $request->input('movie');
             $score =  $request->input('score');
             $opinion = $request->input('opinion');

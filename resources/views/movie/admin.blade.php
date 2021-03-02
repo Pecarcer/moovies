@@ -38,6 +38,7 @@
                                 <a href="{{ route('movie.admin', [ 'sort' => 'title']) }}"> Titulo</a> |
                                 <a href="{{ route('movie.admin', [ 'sort' => 'release']) }}"> Estreno</a>
                             </div>
+                            
 
                         </div>
                         <table class="min-w-max w-full table-auto">
@@ -116,21 +117,21 @@
                 <div class="mt-4">
                     <x-label for="title" :value="__('Título')" />
 
-                    <x-input id="title" class="block mt-1 w-full" type="text" name="title" required />
+                    <x-input id="title" class="block mt-1 w-full" type="text" name="title" required :value="old('title')"/>
                 </div>
 
                 <!-- release -->
                 <div class="mt-4">
-                    <x-label for="estreno" :value="__('Estreno')" />
+                    <x-label for="release" :value="__('Estreno')" />
 
-                    <x-input id="release" class="block mt-1 w-full" type="text" name="release" required placeholder="AAAA-MM-DD" />
+                    <x-input id="release" class="block mt-1 w-full" type="text" name="release" required placeholder="AAAA-MM-DD" :value="old('release')" />
                 </div>
 
                 <!-- DIRECTOR -->
                 <div class="mt-4">
                     <x-label for="director" :value="__('Director')" />
 
-                    <x-input id="director" class="block mt-1 w-full" type="text" name="director" required />
+                    <x-input id="director" class="block mt-1 w-full" type="text" name="director" required :value="old('director')"/>
                 </div>
 
                 <!--POSTER-->

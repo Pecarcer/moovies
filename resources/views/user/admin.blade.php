@@ -135,21 +135,21 @@
                 <div>
                     <x-label for="fullname" :value="__('Nombre Completo')" />
 
-                    <x-input id="fullname" class="block mt-1 w-full" type="text" name="fullname" value="" required autofocus />
+                    <x-input id="fullname" class="block mt-1 w-full" type="text" name="fullname" :value="old('fullname')" required />
                 </div>
 
                 <!-- Nick -->
                 <div class="mt-4">
                     <x-label for="nick" :value="__('Nickname')" />
 
-                    <x-input id="nick" class="block mt-1 w-full" type="text" name="nick" value="" required autofocus />
+                    <x-input id="nick" class="block mt-1 w-full" type="text" name="nick" :value="old('nick')" required />
                 </div>
 
                 <!-- Email Address -->
                 <div class="mt-4">
                     <x-label for="email" :value="__('Email')" />
 
-                    <x-input id="email" class="block mt-1 w-full" type="email" name="email" value="" required />
+                    <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
                 </div>
 
                 <!-- Password -->

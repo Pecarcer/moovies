@@ -29,7 +29,7 @@
             <!-- Usuario -->
             <div>
                 <label for="usuario" :value="__('Usuario')" />
-
+                <p> Usuario </p>
                 <select id="usuario" class="block mt-1 w-full" name="usuario">
                     <option disabled> --Seleccione un Usuario--</option>";
                     @foreach($userList as $user)
@@ -44,11 +44,11 @@
 
             <div>
                 <label for="review" :value="__('Reseña')" />
-
+                <p> Reseña </p>
                 <select id="review" class="block mt-1 w-full" name="review">
                     <option  disabled> --Seleccione una Reseña--</option>";
                     @foreach($reviewList as $review)
-                    <option value="{{ $review->id}}" @if($review->id==$like->review_id) selected @endif > Usuario: {{ $review->user->nick }} // Pelicula: {{ $review->movie->title }} // Reseña: {{ $review->opinion}}</option>
+                    <option value="{{ $review->id}}" @if($review->id==$like->review_id) selected @endif > Autor: {{ $review->user->nick }} // Pelicula: {{ $review->movie->title }} // Reseña: {{ $review->opinion}}</option>
                     @endforeach
                 </select>
 

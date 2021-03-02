@@ -20,7 +20,7 @@
     <div class="row">
 
         <div class="col-md-12 text-center">
-            <h2> Películas Populares según The Movie Database </h2>
+            <h2> Películas más populares del momento </h2>
         </div>
     </div>
 
@@ -70,4 +70,8 @@
             </div>
         </div>
     </div>
+    <div class="col-md-12 text-center">
+            
+            <h5> Información extraída de The Movie Database</h5>
+        </div>
 </x-app-layout>

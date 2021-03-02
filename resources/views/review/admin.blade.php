@@ -95,7 +95,7 @@
                 <!--Usuario-->
                 <div>
                     <label for="user" :value="__('Usuario')" />
-
+                    <p> Usuario </p>
                     <select id="user" class="block mt-1 w-full" name="user">
                         <option selected disabled> --Seleccione un Usuario--</option>";
                         @foreach($userList as $user)
@@ -108,7 +108,7 @@
                 <!--Movie -->
                 <div>
                     <label for="movie" :value="__('Pelicula')" />
-
+                    <p> Película </p>
                     <select id="movie" class="block mt-1 w-full" name="movie">
                         <option selected disabled> --Seleccione una Pelicula--</option>";
                         @foreach($movieList as $movie)
@@ -122,14 +122,14 @@
                 <div>
                     <x-label for="score" :value="__('Nota')" />
 
-                    <x-input id="score" class="block mt-1 w-full" type="text" name="score" value="" autofocus />
+                    <x-input id="score" class="block mt-1 w-full" type="text" name="score" :value="old('score')" />
                 </div>
 
                 <!-- Opinion -->
                 <div class="mt-4">
                     <x-label for="opinion" :value="__('Opinion')" />
 
-                    <x-input id="opinion" class="block mt-1 w-full" type="text" name="opinion" value="" autofocus />
+                    <x-input id="opinion" class="block mt-1 w-full" type="text" name="opinion" :value="old('opinion')" />
                 </div>
 
                 <div class="flex items-center justify-end mt-4">

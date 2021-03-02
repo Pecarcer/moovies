@@ -32,7 +32,7 @@
                 <!--Usuario-->
                 <div>
                     <label for="usuario" :value="__('Usuario')" />
-
+                    <p> Usuario </p>
                     <select id="usuario" class="block mt-1 w-full" name="usuario">
                         <option disabled> --Seleccione un Usuario--</option>";
                         @foreach($userList as $user)
@@ -45,7 +45,7 @@
                 <!--Movie -->
                 <div>
                     <label for="movie" :value="__('Pelicula')" />
-
+                    <p> Película </p>
                     <select id="movie" class="block mt-1 w-full" name="movie">
                         <option selected disabled> --Seleccione una Pelicula--</option>";
                         @foreach($movieList as $movie)

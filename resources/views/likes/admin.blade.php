@@ -75,7 +75,7 @@
                 <!-- Usuario -->
                 <div>
                     <label for="usuario" :value="__('Usuario')" />
-
+                    <p> Usuario </p>
                     <select id="usuario" class="block mt-1 w-full" name="usuario">
                         <option selected disabled> --Seleccione un Usuario--</option>";
                         @foreach($userList as $user)
@@ -90,11 +90,11 @@
 
                 <div>
                     <label for="review" :value="__('Reseña')" />
-
+                    <p> Reseña </p>
                     <select id="review" class="block mt-1 w-full" name="review">
                         <option selected disabled> --Seleccione una Reseña--</option>";
                         @foreach($reviewList as $review)
-                        <option value="{{ $review->id}}"> Usuario: {{ $review->user->nick }} // Pelicula: {{ $review->movie->title }} // Reseña: {{ $review->opinion}}</option>
+                        <option value="{{ $review->id}}"> Autor: {{ $review->user->nick }} // Pelicula: {{ $review->movie->title }} // Reseña: {{ $review->opinion}}</option>
                         @endforeach
                     </select>
 

@@ -18,16 +18,17 @@ class MovieController extends Controller
 
     public function admin()
     {
+ 
         $movieList = new Movie;
 
-        if (request()->has('sort')) {
+        if(request()->has('sort')){
             $movieList = $movieList->orderBy(request('sort'));
         }
 
         $movieList = $movieList->paginate(4)->appends([
             'sort' => request('sort')
         ]);
-
+       
         return view('movie.admin')->with('movieList', $movieList);
     }
 
@@ -43,12 +44,13 @@ class MovieController extends Controller
 
 
         $image_path = $request->file('poster');
+
         if ($image_path) {
 
             $image_path_name = time() . $image_path->getClientOriginalName();
 
             Storage::disk('images')->put($image_path_name, File::get($image_path));
-        }
+        
 
         Movie::create([
             'title' => $request->title,
@@ -60,6 +62,11 @@ class MovieController extends Controller
         return redirect()->route('movie.admin')->with([
             'message' => "¡La película se ha añadido correctamente!"
         ]);
+    } else {
+        return redirect()->route('movie.admin')->with([
+            'errorMessage' => "No se puede añadir película sin un poster"
+        ]);
+    }
     }
 
     public function getImage($filename)
@@ -109,7 +116,7 @@ class MovieController extends Controller
             ]);
 
 
-
+            
             $title =  $request->input('title');
             $release =  $request->input('release');
             $director = $request->input('director');
