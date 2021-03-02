@@ -2,7 +2,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Configuracion de mi cuenta') }}
+            {{ __('Editar Reseña') }}
         </h2>
     </x-slot>
 
@@ -23,59 +23,58 @@
         </div>
         @endif
 
-        <form method="POST" action="{{ route('user.update') }}" enctype="multipart/form-data">
-            @csrf
-
-            <!--Full Name -->
-            <div>
-                <x-label for="fullname" :value="__('Nombre Completo')" />
-
-                <x-input id="fullname" class="block mt-1 w-full" type="text" name="fullname" value="{{ Auth::user()->fullname }}" autofocus />
-            </div>
-
-            <!-- Nick -->
-            <div class="mt-4">
-                <x-label for="nick" :value="__('Nickname')" />
-
-                <x-input id="nick" class="block mt-1 w-full" type="text" name="nick" value="{{ Auth::user()->nick }}" autofocus />
-            </div>
-
-            <!-- Email Address -->
-            <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" value="{{ Auth::user()->email }}" />
-            </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Nueva contraseña')" />
-
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" autocomplete="new-password" />
-            </div>
-
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirma nueva Contraseña')" />
-
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" />
-            </div>
+        <div class="card">
             
-            <br>
-            @include('includes.avatar')
-            <div class="mt-4">
-                <x-label for="avatar" :value="__('Avatar')" />
+            <form method="POST" action="{{ route('review.update',['id'=> $review->id]) }}" class="p-5">
+                @csrf
 
-                <x-input id="avatar" class="block mt-1 w-full" type="file" name="avatar" />
-            </div>
+                <!--Usuario-->
+                <div>
+                    <label for="usuario" :value="__('Usuario')" />
 
-            <div class="flex items-center justify-end mt-4">
+                    <select id="usuario" class="block mt-1 w-full" name="usuario">
+                        <option disabled> --Seleccione un Usuario--</option>";
+                        @foreach($userList as $user)
+                        <option value="{{ $user->id}}"  @if($user->id==$review->user_id) selected @endif > {{ $user->nick}}</option>
+                        @endforeach
+                    </select>
 
-                <x-button class="ml-4">
-                    {{ __('Actualizar') }}
-                </x-button>
-            </div>
-        </form>
-    </div>
+                </div> <br>
+
+                <!--Movie -->
+                <div>
+                    <label for="movie" :value="__('Pelicula')" />
+
+                    <select id="movie" class="block mt-1 w-full" name="movie">
+                        <option selected disabled> --Seleccione una Pelicula--</option>";
+                        @foreach($movieList as $movie)
+                        <option value="{{ $movie->id}}" @if($movie->id==$review->movie_id) selected @endif > {{ $movie->title}}</option>
+                        @endforeach
+                    </select>
+
+                </div> <br>
+
+                <!--Score -->
+                <div>
+                    <x-label for="score" :value="__('Nota')" />
+
+                    <x-input id="score" class="block mt-1 w-full" type="text" name="score" value="{{ $review->score }}" autofocus />
+                </div>
+
+                <!-- Opinion -->
+                <div class="mt-4">
+                    <x-label for="opinion" :value="__('Opinion')" />
+
+                    <x-input id="opinion" class="block mt-1 w-full" type="text" name="opinion" value="{{ $review->opinion }}" autofocus />
+                </div>
+
+                <div class="flex items-center justify-end mt-4">
+
+                    <x-button class="ml-4">
+                        {{ __('Actualizar') }}
+                    </x-button>
+                </div>
+            </form>
+        </div>
 
 </x-app-layout>
