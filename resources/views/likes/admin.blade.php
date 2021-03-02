@@ -46,7 +46,7 @@
                 <!-- Reseña -->
 
                 <div>
-                    <label for="movie" :value="__('Reseña')" />
+                    <label for="review" :value="__('Reseña')" />
 
                     <select id="review" class="block mt-1 w-full" name="review">
                         <option selected disabled> --Seleccione una Reseña--</option>";
@@ -68,11 +68,7 @@
 
     <div class="p-20 center-block">
         @foreach($userList as $user)
-        <div class="card">          
-
-
-                
-
+            <div class="card"> 
                     <table class="min-w-max w-full table-auto">
                         <thead>
                             <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
@@ -86,34 +82,28 @@
                         <tbody class="text-center">
 
                             @foreach($likes as $like)
-                            @if($like->user_id == $user->id)
-                            @foreach($reviewList as $review)
-                            @if($like->review_id == $review->id)
-                            <tr class="text-center">
-                                <td class="text-center"></td>
-                                <td class="text-center">{{ $review->user->nick }}</td>
-                                <td class="text-center">{{ $review->movie->title }}</td>
-                                <td class="text-center">{{ $review->opinion}}</td>
-                                <td>
-                                <a href="{{ route('likes.delete', ['id'=> $like->id]) }}"> <i class="fas fa-trash fa-2x"></i></a>
-                                        &nbsp;
-                                        &nbsp;
-                                        <a href="{{ route('likes.edit', ['id'=> $like->id]) }}"> <i class="fas fa-pencil-alt fa-2x"> </i> </a>
-                                </td>
-                            </tr>
-                            @endif
+                                @if($like->user_id == $user->id)
+                                    @foreach($reviewList as $review)
+                                        @if($like->review_id == $review->id)
+                                            <tr class="text-center">
+                                                <td class="text-center"></td>
+                                                <td class="text-center">{{ $review->user->nick }}</td>
+                                                <td class="text-center">{{ $review->movie->title }}</td>
+                                                <td class="text-center">{{ $review->opinion}}</td>
+                                                <td>
+                                                <a href="{{ route('likes.delete', ['id'=> $like->id]) }}"> <i class="fas fa-trash fa-2x"></i></a>
+                                                        &nbsp;
+                                                        &nbsp;
+                                                        <a href="{{ route('likes.edit', ['id'=> $like->id]) }}"> <i class="fas fa-pencil-alt fa-2x"> </i> </a>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                @endif
                             @endforeach
-                            @endif
-                            @endforeach
-
                         </tbody>
                     </table>
-                    
-                
-            
-
-
-        </div>
+            </div>
         <br><br>
         @endforeach
     </div>

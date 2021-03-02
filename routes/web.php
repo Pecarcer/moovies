@@ -54,12 +54,8 @@ Route::get('/movie/poster/{filename}',[MovieController::class, 'getImage'])->nam
 Route::get('/likes',[UserReviewController::class, 'admin'])->name('likes.admin');//para administrar los likes
 Route::post('/likes/save',[UserReviewController::class, 'save'])->name('likes.save');//para guardar likes
 Route::get('/likes/delete/{id}',[UserReviewController::class, 'delete'])->name('likes.delete');//para eliminar los likes
-Route::get('/likes/edit/{id}',[UserReviewController::class, 'edit'])->name('likes.edit');//lleva a pag para editar pelis
-Route::post('/likes/update/{id}',[UserReviewController::class, 'update'])->name('likes.update'); //para hacer update de pelis
-
-
-
-
+Route::get('/likes/edit/{id}',[UserReviewController::class, 'edit'])->name('likes.edit');//lleva a pag para editar likes
+Route::post('/likes/update/{id}',[UserReviewController::class, 'update'])->name('likes.update'); //para hacer update de likes
 
 
 

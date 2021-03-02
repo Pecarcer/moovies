@@ -2,7 +2,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Configuracion de mi cuenta') }}
+            {{ __('Likes') }}
         </h2>
     </x-slot>
 
@@ -23,54 +23,38 @@
         </div>
         @endif
 
-        <form method="POST" action="{{ route('user.update') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('likes.update',['id'=> $like->id]) }}">
             @csrf
 
-            <!--Full Name -->
+            <!-- Usuario -->
             <div>
-                <x-label for="fullname" :value="__('Nombre Completo')" />
+                <label for="usuario" :value="__('Usuario')" />
 
-                <x-input id="fullname" class="block mt-1 w-full" type="text" name="fullname" value="{{ Auth::user()->fullname }}" autofocus />
+                <select id="usuario" class="block mt-1 w-full" name="usuario">
+                    <option disabled> --Seleccione un Usuario--</option>";
+                    @foreach($userList as $user)
+                    <option value="{{ $user->id}}" @if($user->id==$like->user_id) selected @endif > {{ $user->nick}}</option>
+                    @endforeach
+                </select>
+
             </div>
-
-            <!-- Nick -->
-            <div class="mt-4">
-                <x-label for="nick" :value="__('Nickname')" />
-
-                <x-input id="nick" class="block mt-1 w-full" type="text" name="nick" value="{{ Auth::user()->nick }}" autofocus />
-            </div>
-
-            <!-- Email Address -->
-            <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" value="{{ Auth::user()->email }}" />
-            </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Nueva contraseña')" />
-
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" autocomplete="new-password" />
-            </div>
-
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirma nueva Contraseña')" />
-
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" />
-            </div>
-            
             <br>
-            @include('includes.avatar')
-            <div class="mt-4">
-                <x-label for="avatar" :value="__('Avatar')" />
 
-                <x-input id="avatar" class="block mt-1 w-full" type="file" name="avatar" />
+            <!-- Reseña -->
+
+            <div>
+                <label for="review" :value="__('Reseña')" />
+
+                <select id="review" class="block mt-1 w-full" name="review">
+                    <option  disabled> --Seleccione una Reseña--</option>";
+                    @foreach($reviewList as $review)
+                    <option value="{{ $review->id}}" @if($review->id==$like->review_id) selected @endif > Usuario: {{ $review->user->nick }} // Pelicula: {{ $review->movie->title }} // Reseña: {{ $review->opinion}}</option>
+                    @endforeach
+                </select>
+
             </div>
 
             <div class="flex items-center justify-end mt-4">
-
                 <x-button class="ml-4">
                     {{ __('Actualizar') }}
                 </x-button>
