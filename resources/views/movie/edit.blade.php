@@ -2,7 +2,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Configuracion de mi cuenta') }}
+            {{ __('Peliculas') }}
         </h2>
     </x-slot>
 
@@ -23,59 +23,49 @@
         </div>
         @endif
 
-        <form method="POST" action="{{ route('user.update') }}" enctype="multipart/form-data">
-            @csrf
+        <div class="card">
+            <div class="card-header font-semibold text-xl text-gray-800 leading-tight">Editar Pelicula</div>
+            <form method="POST" action="{{ route('movie.update',['id'=> $movie->id]) }}" class="p-5" enctype="multipart/form-data">
+                @csrf
 
-            <!--Full Name -->
-            <div>
-                <x-label for="fullname" :value="__('Nombre Completo')" />
 
-                <x-input id="fullname" class="block mt-1 w-full" type="text" name="fullname" value="{{ Auth::user()->fullname }}" autofocus />
-            </div>
+                <!-- titulo -->
+                <div class="mt-4">
+                    <x-label for="title" :value="__('Título')" />
 
-            <!-- Nick -->
-            <div class="mt-4">
-                <x-label for="nick" :value="__('Nickname')" />
+                    <x-input id="title" class="block mt-1 w-full" type="text" name="title" value="{{ $movie->title }}" required/>
+                </div>
 
-                <x-input id="nick" class="block mt-1 w-full" type="text" name="nick" value="{{ Auth::user()->nick }}" autofocus />
-            </div>
+                <!-- release -->
+                <div class="mt-4">
+                    <x-label for="estreno" :value="__('Estreno')" />
 
-            <!-- Email Address -->
-            <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
+                    <x-input id="release" class="block mt-1 w-full" type="text" name="release" required placeholder="AAAA-MM-DD" value="{{ $movie->release }}"/>
+                </div>
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" value="{{ Auth::user()->email }}" />
-            </div>
+                <!-- DIRECTOR -->
+                <div class="mt-4">
+                    <x-label for="director" :value="__('Director')" />
 
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Nueva contraseña')" />
+                    <x-input id="director" class="block mt-1 w-full" type="text" name="director" required  value="{{ $movie->director }}"/>
+                </div>
+                <br>
 
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" autocomplete="new-password" />
-            </div>
+                <img src="{{ route('movie.poster', ['filename'=> $movie->poster])  }}" class="avatar">
+                <!--POSTER-->
+                <div class="mt-4">
+                    <x-label for="poster" :value="__('Poster promocional')" />
 
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirma nueva Contraseña')" />
+                    <x-input id="poster" class="block mt-1 w-full" type="file" name="poster" />
+                </div>
 
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" />
-            </div>
-            
-            <br>
-            @include('includes.avatar')
-            <div class="mt-4">
-                <x-label for="avatar" :value="__('Avatar')" />
-
-                <x-input id="avatar" class="block mt-1 w-full" type="file" name="avatar" />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-
-                <x-button class="ml-4">
-                    {{ __('Actualizar') }}
-                </x-button>
-            </div>
-        </form>
+                <div class="flex items-center justify-end mt-4">
+                    <x-button class="ml-4">
+                        {{ __('Editar') }}
+                    </x-button>
+                </div>
+            </form>
+        </div>
     </div>
 
 </x-app-layout>
