@@ -16,22 +16,31 @@ class MovieController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * Para llevar a la vista principal de películas
+     */
     public function admin()
     {
- 
+
         $movieList = new Movie;
 
-        if(request()->has('sort')){
+        if (request()->has('sort')) {
             $movieList = $movieList->orderBy(request('sort'));
         }
 
         $movieList = $movieList->paginate(4)->appends([
             'sort' => request('sort')
         ]);
-       
+
         return view('movie.admin')->with('movieList', $movieList);
     }
 
+    /**
+     * Para guardar una película en la base de datos
+     *
+     * @param  \Illuminate\Http\Request  $request los datos de la película a guardar
+     * 
+     */
     public function save(Request $request)
     {
 
@@ -50,31 +59,41 @@ class MovieController extends Controller
             $image_path_name = time() . $image_path->getClientOriginalName();
 
             Storage::disk('images')->put($image_path_name, File::get($image_path));
-        
 
-        Movie::create([
-            'title' => $request->title,
-            'release' => $request->release,
-            'director' => $request->director,
-            'poster' => $image_path_name,
-        ]);
 
-        return redirect()->route('movie.admin')->with([
-            'message' => "¡La película se ha añadido correctamente!"
-        ]);
-    } else {
-        return redirect()->route('movie.admin')->with([
-            'errorMessage' => "No se puede añadir película sin un poster"
-        ]);
+            Movie::create([
+                'title' => $request->title,
+                'release' => $request->release,
+                'director' => $request->director,
+                'poster' => $image_path_name,
+            ]);
+
+            return redirect()->route('movie.admin')->with([
+                'message' => "¡La película se ha añadido correctamente!"
+            ]);
+        } else {
+            return redirect()->route('movie.admin')->with([
+                'errorMessage' => "No se puede añadir película sin un poster"
+            ]);
+        }
     }
-    }
 
+    /**
+     * Método para obtener la imagen relacionada a película
+     *
+     * @param  $filename el nombre del archivo poster de la pelicula
+     */
     public function getImage($filename)
     {
         $file = Storage::disk('images')->get($filename);
         return new Response($file, 200);
     }
 
+    /**
+     * Para eliminar una película
+     *
+     * @param  $id el id de la peli a borrar
+     */
     public function delete($id)
     {
         if ($movie = Movie::find($id)) {
@@ -90,6 +109,11 @@ class MovieController extends Controller
         }
     }
 
+    /**
+     * Para llevar a la vista de editar una película
+     *
+     * @param  $id el id de la peli a editar
+     */
     public function edit($id)
     {
         if ($movie = Movie::find($id)) {
@@ -101,6 +125,12 @@ class MovieController extends Controller
         }
     }
 
+    /**
+     * Para actualizar una película
+     *
+     * @param  $id el id de la peli a actualizar
+     * @param $request los nuevos datos para actualizar
+     */
     public function update(Request $request, $id)
     {
 
@@ -116,7 +146,7 @@ class MovieController extends Controller
             ]);
 
 
-            
+
             $title =  $request->input('title');
             $release =  $request->input('release');
             $director = $request->input('director');

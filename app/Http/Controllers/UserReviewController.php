@@ -14,6 +14,9 @@ class UserReviewController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * Para llevar a la vista principal de likes
+     */
     public function admin(){   
         
         $likes = UserReview::all();
@@ -26,7 +29,12 @@ class UserReviewController extends Controller
             ->with('userList',$userList);
     }
 
-
+    /**
+     * Para guardar un like en la base de datos
+     *
+     * @param  \Illuminate\Http\Request  $request los datos del like a guardar
+     * 
+     */
     public function save(Request $request)
     {
 
@@ -65,11 +73,13 @@ class UserReviewController extends Controller
             'message' => "¡El nuevo like se ha subido correctamente!"
         ]);
         }
-
-
     }
 
-    
+    /**
+     * Para llevar a la vista de editar un like
+     *
+     * @param  $id el id del like a editar
+     */    
     public function edit($id)
     {
         
@@ -87,6 +97,12 @@ class UserReviewController extends Controller
         }
     }
 
+        /**
+     * Para actualizar un like
+     *
+     * @param  $id el id del like a actualizar
+     * @param $request los nuevos datos para actualizar
+     */
     public function update(Request $request, $id)
     {
 
@@ -129,7 +145,11 @@ class UserReviewController extends Controller
         }
     }
 
-
+    /**
+     * Para eliminar un like
+     *
+     * @param  $id el id del like a borrar
+     */
     public function delete($id)
     {
         if ($like = UserReview::find($id)) {

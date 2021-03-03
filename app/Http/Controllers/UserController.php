@@ -20,88 +20,97 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * Para llevar a la vista de nuestros datos
+     */
     public function config()
     {
         return view('user.config');
     }
 
+    /**
+     * Para actualizar un usuario
+     *
+     * @param  $id el id del usuario a actualizar
+     * @param $request los nuevos datos para actualizar
+     */
     public function update(Request $request, $id)
     {
 
-        if ($user = User::find($id))
-        {
+        if ($user = User::find($id)) {
 
-        $id = $user->id;        
+            $id = $user->id;
 
-        $this->validate($request, [
-            'nick' => 'required|string|max:255|unique:users,nick,' . $id, //el punto $id es para que se haga una excepcion a la hora de validar el unique
-            'email' => 'required|string|email|max:255|unique:users,email,' . $id, 
-            'password' => 'string|confirmed|min:4|nullable',
-            'fullname' => 'required|string',
-            'avatar' => 'mimes:jpg,jpeg,png,gif'
-        ]);
-       
-        $nick =  $request->input('nick');
-        $email =  $request->input('email');
+            $this->validate($request, [
+                'nick' => 'required|string|max:255|unique:users,nick,' . $id, //el punto $id es para que se haga una excepcion a la hora de validar el unique
+                'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+                'password' => 'string|confirmed|min:4|nullable',
+                'fullname' => 'required|string',
+                'avatar' => 'mimes:jpg,jpeg,png,gif'
+            ]);
 
-        if($request->input('password')!=null){
-            $user->password = Hash::make($request->input('password'));
+            $nick =  $request->input('nick');
+            $email =  $request->input('email');
+
+            if ($request->input('password') != null) {
+                $user->password = Hash::make($request->input('password'));
+            }
+
+            $fullname = $request->input('fullname');
+
+            $user->nick = $nick;
+            $user->email = $email;
+            $user->fullname = $fullname;
+
+
+            if ($request->file('avatar') != null) {
+
+                $image_path = $request->file('avatar');
+                if ($image_path) {
+
+                    $image_path_name = time() . $image_path->getClientOriginalName();
+
+                    Storage::disk('users')->put($image_path_name, File::get($image_path));
+                }
+
+                $user->avatar = $image_path_name;
+            }
+
+            $user->update();
+
+            return redirect()->route('user.admin')
+                ->with(['message' => '¡Usuario actualizado correctamente!']);
+        } else {
+            return redirect()->route('user.admin')
+                ->with(['errorMessage' => 'No se encontró el usuario']);
         }
-           
-        $fullname = $request->input('fullname');
-
-        $user->nick = $nick;
-        $user->email = $email;
-        $user->fullname = $fullname;
-
-
-        if($request->file('avatar')!=null){
-
-        $image_path = $request->file('avatar');
-        if ($image_path) {
-
-            $image_path_name = time() . $image_path->getClientOriginalName();
-
-            Storage::disk('users')->put($image_path_name, File::get($image_path));
-        }
-
-        $user->avatar = $image_path_name; }
-
-        $user->update();
-
-        return redirect()->route('user.admin')
-            ->with(['message' => '¡Usuario actualizado correctamente!']);
-    } else {
-        return redirect()->route('user.admin')
-        ->with(['errorMessage' => 'No se encontró el usuario']);
     }
 
-    }
-
+    /**
+     * Método para obtener la imagen relacionada al user
+     *
+     * @param  $filename el nombre del archivo avatar del user
+     */
     public function getImage($filename)
     {
         $file = Storage::disk('users')->get($filename);
         return new Response($file, 200);
     }
 
-    public function profile()
-    {
-        return view('user.profile');
-    }
-
+    /**
+     * Para llevar a la vista principal de usuarios
+     */
     public function admin()
     {
-
-        
         $userList = new User;
 
 
-        if(request()->has('role')){
-            $userList = $userList->where('role',request('role'));
+        if (request()->has('role')) {
+            $userList = $userList->where('role', request('role'));
         }
 
-        if(request()->has('sort')){
-            $userList = $userList->orderBy('id',request('sort'));
+        if (request()->has('sort')) {
+            $userList = $userList->orderBy('id', request('sort'));
         }
 
         $userList = $userList->paginate(4)->appends([
@@ -109,12 +118,16 @@ class UserController extends Controller
             'sort' => request('sort')
         ]);
 
-
         return view('user.admin')
-        ->with('userList', $userList);
-
+            ->with('userList', $userList);
     }
 
+        /**
+     * Para guardar un usuario en la base de datos
+     *
+     * @param  \Illuminate\Http\Request  $request los datos del usuario a guardar
+     * 
+     */
     public function save(Request $request)
     {
 
@@ -140,6 +153,11 @@ class UserController extends Controller
         ]);
     }
 
+        /**
+     * Para eliminar un usuario
+     *
+     * @param  $id el id del usuario a borrar
+     */
     public function delete($id)
     {
 
@@ -163,12 +181,15 @@ class UserController extends Controller
         }
     }
 
-
+    /**
+     * Para llevar a la vista de editar un usuario
+     *
+     * @param  $id el id del ussuario a editar
+     */
     public function edit($id)
     {
         if ($user = User::find($id)) {
-            return view('user.edit',['user'=> $user]);
-           
+            return view('user.edit', ['user' => $user]);
         } else {
             return redirect()->route('user.admin')->with([
                 'errorMessage' => "Usuario no encontrado"

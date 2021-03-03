@@ -15,36 +15,28 @@ class ReviewController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * Para llevar a la vista principal de reseñas
+     */
     public function admin()
     {
         $movieList = Movie::all();
         $reviewList = Review::all();
         $userList = User::all();
 
-        /*$reviewListConsulta = Review::all();
-
-        $reviewList = new UserReview();
-
-        if (request()->has('sort')) {
-            $reviewList = $reviewList->orderBy(request('sort'));
-        }else{
-            $reviewList = $reviewList->orderBy('id');    
-        }
-
-        $reviewList = $reviewList->paginate(4)->appends([
-            'sort' => request('sort')
-        ]);
-*/
-
         return view('review.admin')
             ->with('movieList', $movieList)
-            //->with('reviewListConsulta', $reviewListConsulta)
             ->with('reviewList', $reviewList)
             ->with('userList', $userList);
     }
 
 
-
+    /**
+     * Para guardar una reseña en la base de datos
+     *
+     * @param  \Illuminate\Http\Request  $request los datos de la reseña a guardar
+     * 
+     */
     public function save(Request $request)
     {
 
@@ -91,6 +83,11 @@ class ReviewController extends Controller
         }
     }
 
+    /**
+     * Para eliminar una reseña
+     *
+     * @param  $id el id de la reseña a borrar
+     */
     public function delete($id)
     {
 
@@ -108,7 +105,11 @@ class ReviewController extends Controller
     }
 
 
-
+   /**
+     * Para llevar a la vista de editar una reseña
+     *
+     * @param  $id el id de la peli a editar
+     */
     public function edit($id)
     {
         if ($review = Review::find($id)) {
@@ -124,6 +125,13 @@ class ReviewController extends Controller
         }
     }
 
+    
+    /**
+     * Para actualizar una reseña
+     *
+     * @param  $id el id de la reseña actualizar
+     * @param $request los nuevos datos para actualizar
+     */
     public function update(Request $request, $id)
     {
 
