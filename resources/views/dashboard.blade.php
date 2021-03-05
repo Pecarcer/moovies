@@ -11,6 +11,7 @@
                 <div class="inicio">
                     <div class="p-4 bg-white border-b border-gray-200">
                         <img class="image-container" src={{asset("storage/welcome.jpg")}} />
+                        <!--<img class="image-container" src="{{ route('image', ['filename'=>'welcome.jpg']) }}" />-->
                     </div>
                 </div>
             </div>
@@ -39,8 +40,6 @@
                         <tbody class="text-gray-600 text-sm font-light">
 
                             @foreach($movieReviews["results"] as $review)
-
-
 
                             <tr class="border-b border-gray-200 hover:bg-gray-100">
 

@@ -60,6 +60,6 @@ Route::get('/likes/delete/{id}',[UserReviewController::class, 'delete'])->name('
 Route::get('/likes/edit/{id}',[UserReviewController::class, 'edit'])->name('likes.edit');//lleva a pag para editar likes
 Route::post('/likes/update/{id}',[UserReviewController::class, 'update'])->name('likes.update'); //para hacer update de likes
 
-
+Route::get('/image/{filename}',[ResourcesController::class, 'getImage'])->name('image'); //para acceder al avatar de un usuario
 
 require __DIR__.'/auth.php';
